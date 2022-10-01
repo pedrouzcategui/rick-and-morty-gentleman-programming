@@ -1,6 +1,5 @@
-// "https://rickandmortyapi.com/api/character/?name={name}
 import { useState, useEffect } from "react";
-import { APIResponse, Character } from "../types";
+import { APIResponse } from "../types";
 import { BASE_URL } from "../assets/constants";
 
 
@@ -17,7 +16,7 @@ export default function useSearchCharacters(){
             const data = await response.json();
             setSearchCharacters(data);
         } catch (error) {
-            console.clear(); // To not show errors;
+            console.clear();
             setSearchCharacters({info: {}, results: []});
         }
     }

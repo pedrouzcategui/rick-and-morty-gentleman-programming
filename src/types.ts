@@ -6,15 +6,15 @@ export type Character = {
     type: string,
     gender: string,
     origin: string,
-    location: string,
     image: string,
     episode: string[],
     url: string,
-    created: string;
+    created: string,
+    location: {
+        name: string,
+        url: string,
+    }
 }
-
-export type Episode = {};
-export type Location = {};
 
 export type APIResponse = {
     info?: {

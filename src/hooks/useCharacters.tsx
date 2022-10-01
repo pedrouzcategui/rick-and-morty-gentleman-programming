@@ -13,7 +13,7 @@ export default function useCharacters() {
         try {
             const response = await fetch(BASE_URL + "/character" + (currentPage > 1 ? "?page="+currentPage : ""));
             const data = await response.json();
-            setCharacters(data.results); // Probably here we should use some sort of call back and previous states
+            setCharacters(data.results);
         } catch (error) {
             setError(true);
         } finally {
@@ -24,7 +24,7 @@ export default function useCharacters() {
 
         fetchCharacters();
 
-    }, [currentPage]); // The dependency array is going to receive other variables, it means: Please Re-Run the effect when this value changes!
+    }, [currentPage]);
 
-    return {characters, error, loading, currentPage, fetchCharacters, setCurrentPage}; // Return an object, because arrays actually can be of 2 types and that is an error difficult to handle with TypeScript.
+    return {characters, error, loading, currentPage, fetchCharacters, setCurrentPage};
 }

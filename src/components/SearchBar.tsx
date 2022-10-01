@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useSearchCharacters from "../hooks/useSearchCharacters";
 import { Character } from "../types";
+import { Link } from "react-router-dom";
 
 export default function SearchBar(): JSX.Element {
 
@@ -18,7 +19,6 @@ export default function SearchBar(): JSX.Element {
     return (
         <div className="relative w-4/5 md:w-2/3"
             onFocus={() => handleFocusBlur(true)}
-            onBlur={() => handleFocusBlur(false)}
         >
             <input
                 onKeyUp={(e) => handleSearch(e)}
@@ -27,20 +27,20 @@ export default function SearchBar(): JSX.Element {
                 type="search" />
 
             {
-                ((searchCharacters.results.length > 0) && focus && (searchTerm != "")) ? (
+                ((searchCharacters.results.length > 0) && (searchTerm != "")) ? (
                     <div className="cursor-pointer absolute w-full h-auto max-h-72 z-50 overflow-y-scroll">
                         {
                             searchCharacters.results.map((character: Character) => (
-                                <div key={`Rick-And-Morty-Search-Card-${character.id}`}
-                                    className="border-b-2 transition-all flex items-center p-3 result bg-slate-900 
+                                <Link key={`Rick-And-Morty-Search-Card-${character.id}`} to={`/character/${character.id}`}>
+                                    <div
+                                        className="border-b-2 transition-all flex items-center p-3 result bg-slate-900 
                                     hover:bg-[#5a8515]">
-                                    <img className="rounded-lg mr-4" width={40} height={40} src={character.image} />
-                                    <p className="m-0 text-white"><b>{character.name}</b> - {character.species}</p>
-                                </div>
+                                        <img className="rounded-lg mr-4" width={40} height={40} src={character.image} />
+                                        <p className="m-0 text-white"><b>{character.name}</b> - {character.species}</p>
+                                    </div>
+                                </Link>
                             ))
                         }
-
-                        {/* {characters && JSON.stringify(characters)} */}
                     </div>
                 ) : ""
             }
